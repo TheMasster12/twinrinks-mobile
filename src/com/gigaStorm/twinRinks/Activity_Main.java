@@ -44,7 +44,6 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 	TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.viewPagerIndicator);
 	titleIndicator.setViewPager(viewPager);
 	titleIndicator.setBackgroundColor(getResources().getColor(R.color.vpi__background_holo_dark));
-	//titleIndicator.setFooterColor(getResources().getColor(android.R.color.white));
 	titleIndicator.setFooterIndicatorStyle(TitlePageIndicator.IndicatorStyle.None);
     }
 

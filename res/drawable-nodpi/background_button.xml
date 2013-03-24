@@ -6,7 +6,7 @@
                 android:color="@color/button_pressed" />
             <stroke
                 android:width="2dp"
-                android:color="#FFFFFF" />
+                android:color="@color/abs__holo_blue_light" />
             <corners
                 android:radius="4dp" />
             <padding
@@ -22,7 +22,7 @@
                 android:color="@color/background_gameview" />
             <stroke
                 android:width="2dp"
-                android:color="#FFFFFF" />
+                android:color="@color/abs__holo_blue_light" />
             <corners
                 android:radius="4dp" />
             <padding
