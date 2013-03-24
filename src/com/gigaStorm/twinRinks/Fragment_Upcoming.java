@@ -35,19 +35,24 @@ public class Fragment_Upcoming extends SherlockFragment {
 	    games = memoryManager.getGames();
 	}
 
-	yourTeams = memoryManager.getYourTeams();
+	//yourTeams = memoryManager.getYourTeams();
 
 	btn_upcoming_goToAddTeams = (Button) view.findViewById(R.id.btn_upcoming_goToAddTeams);
 	btn_upcoming_goToAddTeams.setOnClickListener(new OnClickListener() {
 	    @Override
 	    public void onClick(View v) {
-		startActivity(new Intent(getActivity().getApplicationContext(), Activity_SettingsCompat.class));
+		startActivity(new Intent(getActivity().getApplicationContext(), Activity_Settings.class));
 	    }
 	});
-
+	return view;
+    }
+    
+    @Override
+    public void onResume() {
+	yourTeams = memoryManager.getYourTeams();
 	if(yourTeams.size() > 0)
 	    prepareGames();
-	return view;
+        super.onResume();
     }
 
     private void prepareGames() {
@@ -68,6 +73,6 @@ public class Fragment_Upcoming extends SherlockFragment {
 	listView_upcoming_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
 	if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null)
-	    ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).removeViewAt(0);
+	    ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).getChildAt(0).setVisibility(View.GONE);
     }
 }

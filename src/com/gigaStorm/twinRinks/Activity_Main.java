@@ -64,7 +64,7 @@ public class Activity_Main extends SherlockFragmentActivity implements TabListen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	Intent startSettings = new Intent(this, Activity_SettingsCompat.class);
+	Intent startSettings = new Intent(this, Activity_Settings.class);
 	Intent startHome = new Intent(this, Activity_Main.class);
 
 	switch(item.getItemId()) {

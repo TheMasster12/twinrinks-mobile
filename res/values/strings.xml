@@ -7,15 +7,13 @@
     <string name="gameview_middle">Gold League - Red Rink</string>
     <string name="gameview_dateTime">Friday, 3/20/13, at 10:20PM</string>
     <string name="addNewTeams">Add New Teams&#8230;</string>
-    <string name="yourTeams">Your Teams</string>
-    <string name="allGames">All Games</string>
-    <string name="playoffs">Playoffs</string>
-    <string name="today">Today</string>
-    <string name="chooseDate">Choose Date</string>
-    <string name="anyTeam">Any Team</string>
     <string name="mainIcon">Main Icon</string>
     <string name="share">Share</string>
     <string name="rate">Rate App</string>
     <string name="sendFeedback">Feedback</string>
     <string name="schedule_dataSelector">Choose Schedule Data</string>
+    <string name="refresh">Refresh</string>
+    <string name="help">Help</string>
+    <string name="addGamesToCalendar">Add Games To Calendar</string>
+    <string name="settings">Settings</string>
 </resources>

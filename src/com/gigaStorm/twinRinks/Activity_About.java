@@ -70,7 +70,7 @@ public class Activity_About extends SherlockActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	// Intents to start activities of the app
-	Intent startSettings = new Intent(this, Activity_SettingsCompat.class);
+	Intent startSettings = new Intent(this, Activity_Settings.class);
 	Intent startHome = new Intent(this, Activity_Main.class);
 
 	switch(item.getItemId()) {

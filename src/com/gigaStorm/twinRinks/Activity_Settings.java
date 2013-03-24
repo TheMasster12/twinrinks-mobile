@@ -15,10 +15,9 @@ import android.text.InputType;
 import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.gigaStorm.twinRinks.R;
 
 @SuppressWarnings("deprecation")// Activity which allows the user to choose settings
-public class Activity_SettingsCompat extends SherlockPreferenceActivity {
+public class Activity_Settings extends SherlockPreferenceActivity {
 
     private PreferenceCategory addTeamCategory;
     private ArrayList<Model_Team> yourTeams;
@@ -31,11 +30,9 @@ public class Activity_SettingsCompat extends SherlockPreferenceActivity {
 	super.onCreate(savedInstanceState);
 	// Adds the settings XML to the activity
 	addPreferencesFromResource(R.xml.settings_main);
-
+	
 	actionBar = getSupportActionBar();
-	// actionBar.setHomeButtonEnabled(true);
-	actionBar.setDisplayShowTitleEnabled(false);
-	actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setTitle("Settings");
 
 	addTeamCategory = (PreferenceCategory) findPreference("addTeamCategory");
 	addTeamCategory.setOrderingAsAdded(false);

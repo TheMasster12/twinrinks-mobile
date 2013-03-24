@@ -29,36 +29,6 @@ import android.widget.Toast;
 	showCalendarPopup();
     }
 
-    private void loopThroughGames(int whichCalendar) {
-	ArrayList<Model_Game> games = memoryManager.getGames();
-
-	// for(Game e: games)
-	Log.e("Game", games.get(101).toString());
-	addGameToCalendar(games.get(101), whichCalendar);
-
-	Log.e("ID", "" + whichCalendar);
-    }
-
-    private void addGameToCalendar(Model_Game game,int whichCalendar) {
-	ContentResolver cr = context.getContentResolver();
-	ContentValues values = new ContentValues();
-
-	try {
-	    values.put(CalendarContract.Events.CALENDAR_ID, 0);
-	    values.put(CalendarContract.Events.TITLE, "Hockey- " + game.getLeague() + ": " + game.getTeamH() + " vs " + game.getTeamA());
-	    values.put(CalendarContract.Events.EVENT_LOCATION, "Twin Rinks Ice Arena- " + game.getRink() + " Rink");
-	    values.put(CalendarContract.Events.DTSTART, game.getCalendarObject().getTimeInMillis());
-	    values.put(CalendarContract.Events.DTEND, game.getCalendarObject().getTimeInMillis() + 5400000);
-	    values.put(CalendarContract.Events.ALL_DAY, 0);
-	    values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-
-	    cr.insert(CalendarContract.Events.CONTENT_URI, values);
-	} catch(Exception e) {
-	    Log.e("Error", e.getMessage());
-	    toast(e.getMessage());
-	}
-    }
-
     private void showCalendarPopup() {
 	final ContentResolver cr;
 	final Cursor result;
@@ -82,12 +52,42 @@ import android.widget.Toast;
 	builder.setItems(calendars, new DialogInterface.OnClickListener() {
 	    @Override
 	    public void onClick(DialogInterface dialog,int itemCal) {
-		Log.d("SettingsActivity", "CalendarID: " + itemCal);
+		Log.e("SettingsActivity", "CalendarID: " + itemCal);
 		loopThroughGames(itemCal);
 	    };
 	});
 	AlertDialog alert = builder.create();
 	alert.show();
+    }
+
+    private void loopThroughGames(int whichCalendar) {
+	ArrayList<Model_Game> games = memoryManager.getGames();
+
+	// for(Game e: games)
+	Log.e("Game", games.get(110).toString());
+	addGameToCalendar(games.get(110), whichCalendar);
+
+	Log.e("ID", "" + whichCalendar);
+    }
+
+    private void addGameToCalendar(Model_Game game,int whichCalendar) {
+	ContentResolver cr = context.getContentResolver();
+	ContentValues values = new ContentValues();
+
+	try {
+	    values.put(CalendarContract.Events.CALENDAR_ID, whichCalendar);
+	    values.put(CalendarContract.Events.TITLE, "Hockey- " + game.getLeague() + ": " + game.getTeamH() + " vs " + game.getTeamA());
+	    values.put(CalendarContract.Events.EVENT_LOCATION, "Twin Rinks Ice Arena- " + game.getRink() + " Rink");
+	    values.put(CalendarContract.Events.DTSTART, "" + game.getCalendarObject().getTimeInMillis());
+	    //values.put(CalendarContract.Events.DTEND, "" + game.getCalendarObject().getTimeInMillis() + 5400000);
+	    values.put(CalendarContract.Events.DURATION, "" + 5400000);
+	    values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+
+	    cr.insert(CalendarContract.Events.CONTENT_URI, values);
+	} catch(Exception e) {
+	    Log.e("Error", e.getMessage());
+	    toast(e.getMessage());
+	}
     }
 
     public void toast(Object obj) {
