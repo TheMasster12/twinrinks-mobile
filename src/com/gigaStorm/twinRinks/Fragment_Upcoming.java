@@ -39,6 +39,11 @@ public class Fragment_Upcoming extends SherlockFragment {
 	    }
 	});
 
+	games = memoryManager.getGames();
+	
+	if(games.size() <= 0)
+	    memoryManager.refreshData();
+	
 	if(yourTeams.size() > 0)
 	    prepareGames();
 
@@ -46,8 +51,6 @@ public class Fragment_Upcoming extends SherlockFragment {
     }
 
     private void prepareGames() {
-	games = memoryManager.getGames();
-	
 	ArrayList<Model_Game> gamesToAdd = new ArrayList<Model_Game>();
 	for(Model_Game e1: games)
 	    for(Model_Team e: yourTeams)

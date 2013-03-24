@@ -20,23 +20,9 @@ public class Model_Game implements Serializable {
     private String league;
     private Calendar cal;
 
-    public Model_Game(String backing) {
-	// 03/02/13,SA,BLU,08:40P,10:10P,Platinum,GOLD,LIME
-	String[] data = backing.split(";");
-	date = data[0];
-	beginTime = data[1];
-	endTime = data[2];
-	rink = data[3];
-	teamH = data[4];
-	teamA = data[5];
-	league = data[6];
-	cal = generateCalendarObject();
-    }
-
     public Model_Game(String d,String r,String bt,String et,String th,String ta,String l) {
-	// Clear whitespace
 	date = d.replaceAll("\\s", "");
-	beginTime = bt.replaceAll("\\s", "");
+	beginTime = bt.replaceAll("\\s", "") + "M";
 	endTime = et.replaceAll("\\s", "");
 	rink = r.replaceAll("\\s", "");
 	league = l.replaceAll("\\s", "");
@@ -80,7 +66,7 @@ public class Model_Game implements Serializable {
 	SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy;hh:mma", Locale.US);
 	Date date = new Date();
 	try {
-	    date = format.parse(this.date + ";" + this.beginTime + "M");
+	    date = format.parse(this.date + ";" + this.beginTime);
 	} catch(ParseException e) {
 	    e.printStackTrace();
 	}
@@ -90,10 +76,6 @@ public class Model_Game implements Serializable {
 
     public Calendar getCalendarObject() {
 	return this.cal;
-    }
-
-    public String getGameKey() {
-	return date + ";" + beginTime + ";" + endTime + ";" + rink + ";" + teamH + ";" + teamA + ";" + league;
     }
 
     public String toString() {

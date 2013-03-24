@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_gameview"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp" >
 
     <TextView
         android:id="@+id/textView_gameview_top"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:includeFontPadding="false"
         android:text="@string/gameview_top"
         android:textColor="@android:color/white"
         android:textSize="@dimen/gameview_top" />
