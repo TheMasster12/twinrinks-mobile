@@ -29,6 +29,12 @@ public class Fragment_Upcoming extends SherlockFragment {
 	view = inflater.inflate(R.layout.layout_frag_upcoming, container, false);
 
 	memoryManager = new Data_MemoryManager(getActivity());
+	games = memoryManager.getGames();
+	if(games.size() <= 0) {
+	    memoryManager.refreshData();
+	    games = memoryManager.getGames();
+	}
+
 	yourTeams = memoryManager.getYourTeams();
 
 	btn_upcoming_goToAddTeams = (Button) view.findViewById(R.id.btn_upcoming_goToAddTeams);
@@ -39,14 +45,8 @@ public class Fragment_Upcoming extends SherlockFragment {
 	    }
 	});
 
-	games = memoryManager.getGames();
-	
-	if(games.size() <= 0)
-	    memoryManager.refreshData();
-	
 	if(yourTeams.size() > 0)
 	    prepareGames();
-
 	return view;
     }
 
@@ -57,11 +57,11 @@ public class Fragment_Upcoming extends SherlockFragment {
 		if((e1.getTeamA().equalsIgnoreCase(e.getTeamName()) || e1.getTeamH().equalsIgnoreCase(e.getTeamName())) && e1.getLeague().equalsIgnoreCase(e.getLeague()))
 		    if(!e1.hasPassed())
 			gamesToAdd.add(e1);
-	
+
 	String[] values = new String[gamesToAdd.size()];
-	for(int i=0;i<values.length;i++)
+	for(int i = 0; i < values.length; i++)
 	    values[i] = gamesToAdd.get(i).toString();
-	
+
 	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
 	listView_upcoming_main = (ListView) view.findViewById(R.id.listView_upcoming_main);
 	listView_upcoming_main.setAdapter(adapter);

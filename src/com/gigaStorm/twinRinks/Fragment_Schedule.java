@@ -59,7 +59,6 @@ public class Fragment_Schedule extends SherlockFragment implements OnItemSelecte
 		switch(which) {
 		    case 0:
 			showSelectFromAllTeamsPopup();
-			Toast.makeText(getActivity(), "Test", Toast.LENGTH_LONG).show();
 			return;
 		    case 1:
 			showSelectFromYourTeamsPopup();

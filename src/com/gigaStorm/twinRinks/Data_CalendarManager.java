@@ -33,10 +33,10 @@ import android.widget.Toast;
 	ArrayList<Model_Game> games = memoryManager.getGames();
 
 	// for(Game e: games)
-	Log.d("Game", games.get(100).toString());
-	addGameToCalendar(games.get(100), whichCalendar);
+	Log.e("Game", games.get(101).toString());
+	addGameToCalendar(games.get(101), whichCalendar);
 
-	Log.d("ID", "" + whichCalendar);
+	Log.e("ID", "" + whichCalendar);
     }
 
     private void addGameToCalendar(Model_Game game,int whichCalendar) {
@@ -44,7 +44,7 @@ import android.widget.Toast;
 	ContentValues values = new ContentValues();
 
 	try {
-	    values.put(CalendarContract.Events.CALENDAR_ID, whichCalendar);
+	    values.put(CalendarContract.Events.CALENDAR_ID, 0);
 	    values.put(CalendarContract.Events.TITLE, "Hockey- " + game.getLeague() + ": " + game.getTeamH() + " vs " + game.getTeamA());
 	    values.put(CalendarContract.Events.EVENT_LOCATION, "Twin Rinks Ice Arena- " + game.getRink() + " Rink");
 	    values.put(CalendarContract.Events.DTSTART, game.getCalendarObject().getTimeInMillis());

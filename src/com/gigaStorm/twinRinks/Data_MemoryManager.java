@@ -1,6 +1,7 @@
 package com.gigaStorm.twinRinks;
 
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -111,19 +112,27 @@ public class Data_MemoryManager {
 	}
     }
 
-    @SuppressWarnings("unchecked") public ArrayList<Model_Team> getYourTeams() {
-	ArrayList<Model_Team> tasks = new ArrayList<Model_Team>();
+    @SuppressWarnings("unchecked")
+    public ArrayList<Model_Team> getYourTeams() {
+	ArrayList<Model_Team> yourTeams = null;
 	try {
 	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(yourTeamStorage));
 	    Object obj = inFile.readObject();
-	    tasks = (ArrayList<Model_Team>) obj;
+	    yourTeams = (ArrayList<Model_Team>) obj;
 	    inFile.close();
-	    return tasks;
-	} catch(Exception e) {
+	} catch(EOFException e) {
 	    e.printStackTrace();
+	} catch(IOException e1) {
+	    e1.printStackTrace();
 	    resetFiles();
-	    return tasks;
+	} catch(ClassNotFoundException e2) {
+	    e2.printStackTrace();
+	    resetFiles();
 	}
+
+	if(yourTeams == null)
+	    yourTeams = new ArrayList<Model_Team>();
+	return yourTeams;
     }
 
     public void saveTeams(ArrayList<Model_Team> teams) {
@@ -137,19 +146,27 @@ public class Data_MemoryManager {
 	}
     }
 
-    @SuppressWarnings("unchecked") public ArrayList<Model_Team> getTeams() {
-	ArrayList<Model_Team> tasks = new ArrayList<Model_Team>();
+    @SuppressWarnings("unchecked")
+    public ArrayList<Model_Team> getTeams() {
+	ArrayList<Model_Team> teams = null;
 	try {
 	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(allTeamStorage));
 	    Object obj = inFile.readObject();
-	    tasks = (ArrayList<Model_Team>) obj;
+	    teams = (ArrayList<Model_Team>) obj;
 	    inFile.close();
-	    return tasks;
-	} catch(Exception e) {
+	} catch(EOFException e) {
 	    e.printStackTrace();
+	} catch(IOException e1) {
+	    e1.printStackTrace();
 	    resetFiles();
-	    return tasks;
+	} catch(ClassNotFoundException e2) {
+	    e2.printStackTrace();
+	    resetFiles();
 	}
+
+	if(teams == null)
+	    teams = new ArrayList<Model_Team>();
+	return teams;
     }
 
     public void saveGames(ArrayList<Model_Game> games) {
@@ -163,19 +180,26 @@ public class Data_MemoryManager {
 	}
     }
 
-    @SuppressWarnings("unchecked") public ArrayList<Model_Game> getGames() {
-	ArrayList<Model_Game> tasks = new ArrayList<Model_Game>();
+    @SuppressWarnings("unchecked")
+    public ArrayList<Model_Game> getGames() {
+	ArrayList<Model_Game> games = null;
 	try {
 	    ObjectInputStream inFile = new ObjectInputStream(new FileInputStream(gameStorage));
 	    Object obj = inFile.readObject();
-	    tasks = (ArrayList<Model_Game>) obj;
+	    games = (ArrayList<Model_Game>) obj;
 	    inFile.close();
-	    return tasks;
-	} catch(Exception e) {
+	} catch(EOFException e) {
 	    e.printStackTrace();
+	} catch(IOException e1) {
+	    e1.printStackTrace();
 	    resetFiles();
-	    return tasks;
+	} catch(ClassNotFoundException e2) {
+	    e2.printStackTrace();
+	    resetFiles();
 	}
+	if(games == null)
+	    games = new ArrayList<Model_Game>();
+	return games;
     }
 
     public void resetFiles() {
