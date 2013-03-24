@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background_gameview"
     android:orientation="vertical"
-    android:background="@android:color/white"
     android:padding="10dp" >
 
     <TextView
@@ -11,15 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/gameview_top"
-        android:textColor="@color/topTextColor"
-        android:textSize="22sp" />
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView_gameview_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameview_middle"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textView_gameview_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gameview_dateTime"
-        android:textColor="@color/bottomTextColor"
-        android:textSize="12sp" />
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp" />
 
 </LinearLayout>

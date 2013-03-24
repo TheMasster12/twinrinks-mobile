@@ -63,8 +63,6 @@ public class Fragment_Upcoming extends SherlockFragment {
 	listView_upcoming_main = (ListView) view.findViewById(R.id.listView_upcoming_main);
 	listView_upcoming_main.setAdapter(adapter);
 	listView_upcoming_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
-	listView_upcoming_main.setDivider(null);
-	listView_upcoming_main.setDividerHeight(10);
 
 	if(!yourTeams.isEmpty() && btn_upcoming_goToAddTeams != null)
 	    ((LinearLayout) btn_upcoming_goToAddTeams.getParent()).removeViewAt(0);

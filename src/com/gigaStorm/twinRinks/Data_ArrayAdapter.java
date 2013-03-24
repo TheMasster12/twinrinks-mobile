@@ -31,10 +31,15 @@ public class Data_ArrayAdapter extends ArrayAdapter<String> {
 	
 	Model_Game tempGame = games.get(position);
 	
-	String topText = tempGame.getLeague() + " - " + tempGame.getTeamH() + " vs " + tempGame.getTeamA();
-	String bottomText = tempGame.getFullDateString() + " - " + tempGame.getRink() + " Rink";
+	String topText = tempGame.getTeamH() + " vs " + tempGame.getTeamA();
+	String middleText = tempGame.getLeague() + " League - " + tempGame.getRink() + " Rink";
+	String bottomText = tempGame.getFullDateString();
+	
+	if(tempGame.getTeamH().equals("PLAYOFFS"))
+	    topText = "PLAYOFF GAME";
 	
 	((TextView) rowView.findViewById(R.id.textView_gameview_top)).setText(topText);
+	((TextView) rowView.findViewById(R.id.textView_gameview_middle)).setText(middleText);
 	((TextView) rowView.findViewById(R.id.textView_gameview_bottom)).setText(bottomText);
 	
 	return rowView;

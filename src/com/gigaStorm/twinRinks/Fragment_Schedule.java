@@ -15,20 +15,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.gigaStorm.twinRinks.R;
 
-public class Fragment_Schedule extends SherlockFragment {
+public class Fragment_Schedule extends SherlockFragment implements OnItemSelectedListener {
 
-    private Button btn_schedule_viewAnyTeam;
-    private Button btn_schedule_viewTeam;
-    private Button btn_schedule_viewAllGames;
-    private Button btn_schedule_viewPlayoffs;
-    private Button btn_schedule_viewToday;
-    private Button btn_schedule_viewDate;
+    private Button btn_schedule_dataSelector;
     private Data_MemoryManager memoryManager;
     private View view;
     private ListView listView_schedule_main;
@@ -41,50 +39,50 @@ public class Fragment_Schedule extends SherlockFragment {
 
 	listView_schedule_main = (ListView) view.findViewById(R.id.listView_schedule_main);
 	listView_schedule_main.setSelector(new ColorDrawable(Color.TRANSPARENT));
-	listView_schedule_main.setDivider(null);
-	listView_schedule_main.setDividerHeight(10);
 
-	btn_schedule_viewAnyTeam = (Button) view.findViewById(R.id.btn_schedule_viewAll);
-	btn_schedule_viewTeam = (Button) view.findViewById(R.id.btn_schedule_viewTeam);
-	btn_schedule_viewAllGames = (Button) view.findViewById(R.id.btn_schedule_allGames);
-	btn_schedule_viewPlayoffs = (Button) view.findViewById(R.id.btn_schedule_playoffs);
-	btn_schedule_viewToday = (Button) view.findViewById(R.id.btn_schedule_viewToday);
-	btn_schedule_viewDate = (Button) view.findViewById(R.id.btn_schedule_viewDate);
-
-	btn_schedule_viewAnyTeam.setOnClickListener(new OnClickListener() {
+	btn_schedule_dataSelector = (Button) view.findViewById(R.id.btn_schedule_dataSelector);
+	btn_schedule_dataSelector.setOnClickListener(new OnClickListener() {
+	    @Override
 	    public void onClick(View v) {
-		showSelectFromAllTeamsPopup();
+		showDataSelectionPopup();
 	    }
 	});
-	btn_schedule_viewTeam.setOnClickListener(new OnClickListener() {
-	    public void onClick(View v) {
-		showSelectFromYourTeamsPopup();
-	    }
-	});
-	btn_schedule_viewAllGames.setOnClickListener(new OnClickListener() {
-	    public void onClick(View v) {
-		showScheduleDataAllGames();
-	    }
-	});
-	btn_schedule_viewPlayoffs.setOnClickListener(new OnClickListener() {
-	    public void onClick(View v) {
-		showScheduleDataPlayoffs();
-	    }
-	});
-	btn_schedule_viewToday.setOnClickListener(new OnClickListener() {
-	    public void onClick(View v) {
-		Time current = new Time();
-		current.setToNow();
-		showScheduleDataDate(current.year, current.month, current.monthDay);
-	    }
-	});
-	btn_schedule_viewDate.setOnClickListener(new OnClickListener() {
-	    public void onClick(View v) {
-		showSelectDatePopup();
-	    }
-	});
-
 	return view;
+    }
+
+    public void showDataSelectionPopup() {
+	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	builder.setTitle("Choose Schedule Data to View:");
+	builder.setItems(R.array.spinner_scheduleDataSelector_entries, new DialogInterface.OnClickListener() {
+	    @Override
+	    public void onClick(DialogInterface dialog,int which) {
+		switch(which) {
+		    case 0:
+			showSelectFromAllTeamsPopup();
+			Toast.makeText(getActivity(), "Test", Toast.LENGTH_LONG).show();
+			return;
+		    case 1:
+			showSelectFromYourTeamsPopup();
+			return;
+		    case 2:
+			showScheduleDataAllGames();
+			return;
+		    case 3:
+			showScheduleDataPlayoffs();
+			return;
+		    case 4:
+			showSelectDatePopup();
+			return;
+		    case 5:
+			Time current = new Time();
+			current.setToNow();
+			showScheduleDataDate(current.year, current.month, current.monthDay);
+			return;
+		}
+	    }
+	});
+	AlertDialog alert = builder.create();
+	alert.show();
     }
 
     public void showSelectFromAllTeamsPopup() {
@@ -195,5 +193,37 @@ public class Fragment_Schedule extends SherlockFragment {
 
 	Data_ArrayAdapter adapter = new Data_ArrayAdapter(getActivity(), gamesToAdd, values);
 	listView_schedule_main.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> arg0,View arg1,int pos,long arg3) {
+	switch(pos) {
+	    case 0:
+		showSelectFromAllTeamsPopup();
+		Toast.makeText(getActivity(), "Test", Toast.LENGTH_LONG).show();
+		return;
+	    case 1:
+		showSelectFromYourTeamsPopup();
+		return;
+	    case 2:
+		showScheduleDataAllGames();
+		return;
+	    case 3:
+		showScheduleDataPlayoffs();
+		return;
+	    case 4:
+		showSelectDatePopup();
+		return;
+	    case 5:
+		Time current = new Time();
+		current.setToNow();
+		showScheduleDataDate(current.year, current.month, current.monthDay);
+		return;
+	}
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+	return;
     }
 }
